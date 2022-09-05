@@ -1,12 +1,12 @@
 # Adding rudimentary support for an IsoPdom Simulation for the Gen2 Upgrade
 
 ## Requires
-1. manually imported dashi module
-2. went to ~/.local/lib/python3.10/site-packages/dashi/odict.py and changed
-`from collections import ..` to `from collections.abc import ..`
-***In order to run the singletable_quality script***
-3. manually imported termcolors using `pip install termcolor`
-4. manually installed tqdm using `pip install tqdm`
+1. import dashi module
+2. go to ~/.local/lib/python3.10/site-packages/dashi/odict.py and change
+`from collections import ..` to `from collections.abc import ..` <br />
+#### Running the singletable_quality.py script**
+3. import termcolors using `pip install termcolor`
+4. install tqdm using `pip install tqdm`
 
 ## A little background 
 
@@ -14,7 +14,7 @@ The new generation of mDOMs aims to detect photons coming from different directi
 A very simple assumption that can somehow shed some light into the expected behaviour
 is assuming that the detector is a sphere and can detect photons coming from all the possible
 angles. Since the currently deployed pDOMS have their detectors placed in their lower half 
-we tried to also _create_ an upper part detector and combine them in order to have a spherical one.
+this work focuses on  _creating_ an upper part detector and on combining them in order to have a spherical one.
 Details about the implementation and the assumptions made are specified later. 
 
 
@@ -52,7 +52,7 @@ parser.add_option("--verbose", action="store_true", default=False, dest="verbose
 ###### The options are self explanatory but there are some things to point out:
 
 - Defining the `--seed` parameter is important to have an even photon distribution 
-- In order to create a *.fits* file with 10k events , 100 batches of 100 events each with differnt `--seed` parameters were needed( _since the photon propagation is an embarrassingly parallel[3](https://en.wikipedia.org/wiki/Embarrassingly_parallel) process, slicing in batches and then merging them is quicker_)
+- In order to create a *.fits* file with 10k events , 100 batches of 100 events each with differnt `--seed` parameters were needed( _since the photon propagation is an embarrassingly parallel[[3]](https://en.wikipedia.org/wiki/Embarrassingly_parallel) process, slicing in batches and then merging them is quicker_)
 - For the production of the flat model table, the default ice model is used (**spice_bfr-v2_flat**)
 - In order to also add the `effective distance` the tablesize should be set to `'full'` (_not yet implemented_)
 
@@ -63,6 +63,7 @@ The basic idea was to use the already existing models, with modifications in ord
     `tray.AddSegment(TabulatePhotonsFromSource...)` <br />
     `TabulatePhotonsFromSource` is a module imported from `tabulator.py`. Since this is not a part of the icecube software, `tabulator_batch.py` script is the one with the additions for the isopdom. <br />
     This module defines among **many** other things:
+    ### ELABORATE ON EACH ONE
     - The DOM Radius
     - The reference Area
     - The DOM Acceptance (Wavelength Acceptance)
@@ -72,17 +73,40 @@ The basic idea was to use the already existing models, with modifications in ord
   - lowerhalf
   - upperhalf
   - isotropic
-(_lower and upper halves can be combined to produce the isotropic one_)
+(_lower and upper halves can be combined to produce the isotropic one, the option was added for completeness_)
 
 - Since the DEgg's properties are closer to what is to be simulated we used its radius and reference area and altered the **angular sensitivity** and **wavelength acceptance** in a way that:
    - We needed the product <br />
-     angSensitivity*referenceAreaDegg*wavelengthAcceptanceDegg($\lamba$=400nm) = 100cm<sup>2</sup> since these are the measurments for the mDOM. <br />
+     angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg($\lamda$=400nm) = 100cm<sup>2</sup> since these are the measurments for the mDOM. <br />
      ###### Angular Sensitivity
      The angular sensitivity function is a polynomial P($\cos\theta$) of 11-th order and is defined by its coefficients<br />
      (more details can be found under the original _GetAngularSensitivity_ functions)[4](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      $1/2$  $+-$  $1/2$ $\cos\theta$ <br />
-     where $\theta$ is the direction the photon has when coming to the surface
+     where $\theta$ is the direction of the photon, **+** is used for the `lowerhalf` type sensor ($\theta$ = 0 when the photon arriving from the conventionally used `-inf`) and the function
+     defined gives us the cross section area of the sphere. <br />
+     The added function used to incorporate this geometry is called **GetGeometricAngularSensitivity** and is found in the `tabulator_batch.py` script. The result is a **I3CLSimFunctionPolynomial** and the first element of the array given is the **a<sub>0</sub>** (constant)coefficient, whereas the last one is the **a<sub>n-1</sub>**  
+     The function is provided below : <br />
+     ```
+     def GetGeometricAngularSensitivity(type='lowerhalf'):
+        import numpy as np
+        if type == 'lowerhalf':
+            coeffs=np.array([1./2,1./2,0.,0.,0.,0.,0.,0.,0.,0.,0.])
+        elif type=='upperhalf':
+            coeffs = np.array([1./2,-1./2,0.,0.,0.,0.,0.,0.,0.,0.,0.])
+        elif type=='isotropic':
+            coeffs = np.array([1.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.])
+        return I3CLSimFunctionPolynomial(coeffs)
+     ```
+   - In order to satisfy the first bullet point of this sublist (product=100cm<sup>2</sup>) the option **active_fraction** was set to $1.2265621103449313$. The calculation behind it was straightforward and can be found in the `plots.ipynb` file.
+   ###### use _I3Units.(mm,nanometer,m,etc.)_ when querying 
+   ###### _Get[insert type of sensor]Acceptance.GetValue()_ returns the wanted acceptace
+   ###### np.vectorize() was used on the _GetValues_ attribute
+   ###### the result of the product is in m<sup>2</sup>
+
+    
+
+    
 
 
