@@ -82,6 +82,7 @@ The basic idea was to use the already existing models, with modifications in ord
      ###### Angular Sensitivity
      The angular sensitivity function is a polynomial $P(\cos\theta)$ of 11-th order and is defined by its coefficients<br />
      (more details can be found under the original _GetAngularSensitivity_ functions)[[4]](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
+     This polynomial is multiplied with $\pi\r<sup>2</sup>$ and is zenith angle $\theta$ dependent. The maximum value it can get is 2 since $2\pi\r<sup>2</sup>$  is the maximum effective area of the sphere.
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      ${1 \over 2}{(1 \pm \cos\theta)}$ <br />
@@ -101,10 +102,10 @@ The basic idea was to use the already existing models, with modifications in ord
         return I3CLSimFunctionPolynomial(coeffs)
      ```
    - In order to satisfy the first bullet point of this sublist (product=100cm<sup>2</sup>) the option **active_fraction** was set to $1.2265621103449313$. The calculation behind it was straightforward and can be found in the `plots.ipynb` file.
-   - ##### use _I3Units.(mm,nanometer,m,etc.)_ when querying 
-   - ##### _Get[insert type of sensor]Acceptance.GetValue()_ returns the wanted acceptace
-   - ##### np.vectorize() was used on the _GetValues_ attribute
-   - ##### the result of the product is in m<sup>2</sup>
+   -  use _I3Units.(mm,nanometer,m,etc.)_ when querying 
+   - _Get[insert type of sensor]Acceptance.GetValue()_ returns the wanted acceptace
+   - np.vectorize() was used on the _GetValues_ attribute
+   - the result of the product is in m<sup>2</sup>
 
     
 
