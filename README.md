@@ -52,7 +52,7 @@ parser.add_option("--verbose", action="store_true", default=False, dest="verbose
 ###### The options are self explanatory but there are some things to point out:
 
 - Defining the `--seed` parameter is important to have an even photon distribution 
-- In order to create a *.fits* file with 10k events , 100 batches of 100 events each with differnt `--seed` parameters were needed( _since the photon propagation is an embarrassingly parallel[[3]](https://en.wikipedia.org/wiki/Embarrassingly_parallel) process, slicing in batches and then merging them is quicker_)
+- In order to create a *.fits* file with 10k events , 100 batches of 100 events each with differnt `--seed` parameters were needed(_since the photon propagation is an embarrassingly parallel[[3]](https://en.wikipedia.org/wiki/Embarrassingly_parallel) process, slicing in batches and then merging them is quicker_)
 - For the production of the flat model table, the default ice model is used (**spice_bfr-v2_flat**)
 - In order to also add the `effective distance` the tablesize should be set to `'full'` (_not yet implemented_)
 
@@ -77,14 +77,14 @@ The basic idea was to use the already existing models, with modifications in ord
 
 - Since the DEgg's properties are closer to what is to be simulated we used its radius and reference area and altered the **angular sensitivity** and **wavelength acceptance** in a way that:
    - We needed the product <br />
-     angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg($\lamda$=400nm) = 100cm<sup>2</sup> since these are the measurments for the mDOM. <br />
+     angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg(400nm) = 100cm<sup>2</sup> since these are the measurments for the mDOM. <br />
      ###### Angular Sensitivity
      The angular sensitivity function is a polynomial P($\cos$\$\theta$) of 11-th order and is defined by its coefficients<br />
      (more details can be found under the original _GetAngularSensitivity_ functions)[[4]](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
-     $1/2$  $+-$  $1/2$ $\cos\theta$ <br />
-     where $\theta$ is the direction of the photon, **+** is used for the `lowerhalf` type sensor ($\theta$ = 0 when the photon arriving from the conventionally used `-inf`) and the function
+     $$ {1 \over 2}{(1 \pm \cos\theta)} $$ <br />
+     where $\theta$ is the direction of the photon, **+** is used for the `lowerhalf` type sensor ( $\theta$ = 0 when the photon arriving from the conventionally used `-inf`) and the function
      defined gives us the cross section area of the sphere. <br />
      The added function used to incorporate this geometry is called **GetGeometricAngularSensitivity** and is found in the `tabulator_batch.py` script. The result is a **I3CLSimFunctionPolynomial** and the first element of the array given is the **a<sub>0</sub>** (constant)coefficient, whereas the last one is the **a<sub>n-1</sub>**  
      The function is provided below : <br />
