@@ -77,12 +77,12 @@ The basic idea was to use the already existing models, with modifications in ord
 
 - Since the DEgg's properties are closer to what is to be simulated we used its radius and reference area and altered the **angular sensitivity** and **wavelength acceptance** in a way that:
    - We needed the product <br />
-     ${angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg(400nm) = 100cm<sup>2</sup>}$ <br />
+     $angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg(400nm) = 100cm<sup>2</sup>$ <br />
      since these are the measurments for the mDOM. <br />
      ###### Angular Sensitivity
      The angular sensitivity function is a polynomial $P(\cos\theta)$ of 11-th order and is defined by its coefficients<br />
      (more details can be found under the original _GetAngularSensitivity_ functions)[[4]](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
-     This polynomial is multiplied with $\pi\r<sup>2</sup>$ and is zenith angle $\theta$ dependent. The maximum value it can get is 2 since $2\pi\r<sup>2</sup>$  is the maximum effective area of the sphere.
+     This polynomial is multiplied with $\pi\r<sup>2</sup>$ and is zenith angle $\theta$ dependent. The maximum value it can get is 2 since $2\pir<sup>2</sup>$  is the maximum effective area of the sphere.
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      ${1 \over 2}{(1 \pm \cos\theta)}$ <br />
