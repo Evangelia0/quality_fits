@@ -86,7 +86,7 @@ The basic idea was to use the already existing models, with modifications in ord
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      ${1 \over 2}{(1 \pm \cos\theta)}$ <br />
-     where $\theta$ is the direction of the photon, $+$ is used for the `lowerhalf` type sensor ( $\theta = 0$ when the photon arriving from the conventionally used $\minus\infty$ and the function
+     where $\theta$ is the direction of the photon, $+$ is used for the `lowerhalf` type sensor ( $\theta = 0$ when the photon arriving from the conventionally used $\-\infty$ and the function
      defined gives us the cross section area of the sphere. <br />
      For the **lowerhalf** when $\theta=0$, the maximum cross section is achieved, whereas when $\theta=\pi$ 
      The added function used to incorporate this geometry is called **GetGeometricAngularSensitivity** and is found in the `tabulator_batch.py` script. The result is a **I3CLSimFunctionPolynomial** and the first element of the array given is the **a<sub>0</sub>** (constant)coefficient, whereas the last one is the **a<sub>n-1</sub>**  
