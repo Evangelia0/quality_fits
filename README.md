@@ -1,4 +1,4 @@
-# Adding rudimentary support for an IsoPdom Simulation for the Gen2 Upgrade
+# Tablemaking for an isotropic spherical DOM for IceCube GEN2
 
 ## Requires
 1. import dashi module
