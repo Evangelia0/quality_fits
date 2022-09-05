@@ -88,7 +88,7 @@ The basic idea was to use the already existing models, with modifications in ord
      ${1 \over 2}{(1 \pm \cos\theta)}$ <br />
      where $\theta$ is the direction of the photon, $+$ is used for the `lowerhalf` type sensor ( $\theta = 0$ when the photon arriving from the conventionally used $\-\infty$ and the function
      defined gives us the cross section area of the sphere. <br />
-     For the **lowerhalf** when $\theta=0$, the maximum cross section is achieved, whereas when $\theta=\pi$ 
+     For the **lowerhalf** when $\theta=0$, the maximum cross section is achieved, whereas when $\theta=\pi$ we get 0. This makes sense since only the lower part of the detector is active, so if a photon is arriving with a direction perpedincular to the maximum cross section and pointing towards it, it won't be detected. <br />
      The added function used to incorporate this geometry is called **GetGeometricAngularSensitivity** and is found in the `tabulator_batch.py` script. The result is a **I3CLSimFunctionPolynomial** and the first element of the array given is the **a<sub>0</sub>** (constant)coefficient, whereas the last one is the **a<sub>n-1</sub>**  
      The function is provided below : <br />
      ```
