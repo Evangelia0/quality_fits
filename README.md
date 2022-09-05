@@ -82,7 +82,7 @@ The basic idea was to use the already existing models, with modifications in ord
      ###### Angular Sensitivity
      The angular sensitivity function is a polynomial $P(\cos\theta)$ of 11-th order and is defined by its coefficients<br />
      (more details can be found under the original _GetAngularSensitivity_ functions)[[4]](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
-     This polynomial is multiplied with $\pi\r<sup>2</sup>$ and is zenith angle $\theta$ dependent. The maximum value it can get is 2 since $2\pir<sup>2</sup>$  is the maximum effective area of the sphere.
+     This polynomial is multiplied with $pir<sup>2</sup>$ and is zenith angle $\theta$ dependent. The maximum value it can get is 2 since $2pir<sup>2</sup>$  is the maximum effective area of the sphere.
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      ${1 \over 2}{(1 \pm \cos\theta)}$ <br />
@@ -123,7 +123,19 @@ arguments:
 - nevents: number of events **all .fits files plotted should have been created with the same number of events**
 - r: In case r is True then the x-axis represents the radius in meters
 - phi: Same for phi
- 
+
+##### submit\_scripts
+
+all of the required scripts for mass production meaning:
+- .fits files for all (depth,zenith) source configurations (the flat icemodel is being used so the azimuth is always set to 180 degrees) <br />
+  where - depth: from -800 to 800m with a step of 20m
+        - zenith: from 0 to 180 degrees with a step of 10 degrees
+
+###### reminder
+for each source configuration 100 .fits files with `nevents=100` are created and then the script `merge_lower/upper.py` should be invoked to merge all of them into a single file
+
+- abs and prob spline fitting for the final .fits files(10000 events each) for every source configuration
+
 
 
 
