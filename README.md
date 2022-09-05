@@ -79,8 +79,8 @@ The basic idea was to use the already existing models, with modifications in ord
    - We needed the product <br />
      angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg($\lamda$=400nm) = 100cm<sup>2</sup> since these are the measurments for the mDOM. <br />
      ###### Angular Sensitivity
-     The angular sensitivity function is a polynomial P($\cos\theta$) of 11-th order and is defined by its coefficients<br />
-     (more details can be found under the original _GetAngularSensitivity_ functions)[4](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
+     The angular sensitivity function is a polynomial P($\cos$\$\theta$) of 11-th order and is defined by its coefficients<br />
+     (more details can be found under the original _GetAngularSensitivity_ functions)[[4]](https://github.com/icecube/icetray/tree/main/clsim/python) <br />
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      $1/2$  $+-$  $1/2$ $\cos\theta$ <br />
