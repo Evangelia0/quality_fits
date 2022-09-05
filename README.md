@@ -77,7 +77,7 @@ The basic idea was to use the already existing models, with modifications in ord
 
 - Since the DEgg's properties are closer to what is to be simulated we used its radius and reference area and altered the **angular sensitivity** and **wavelength acceptance** in a way that:
    - We needed the product <br />
-   ${angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg(400nm) = 100cm<sup>2</sup>}$
+     ${angSensitivity\*referenceAreaDegg\*wavelengthAcceptanceDegg(400nm) = 100cm<sup>2</sup>}$ <br />
      since these are the measurments for the mDOM. <br />
      ###### Angular Sensitivity
      The angular sensitivity function is a polynomial $P(\cos\theta)$ of 11-th order and is defined by its coefficients<br />
@@ -85,7 +85,7 @@ The basic idea was to use the already existing models, with modifications in ord
      
      The idea is to use a simple geometric representation of the DOM's angular sensitivity which is defined by : <br />
      ${1 \over 2}{(1 \pm \cos\theta)}$ <br />
-     where $\theta$ is the direction of the photon, $+$ is used for the `lowerhalf` type sensor ( $\theta \eqalign 0$ when the photon arriving from the conventionally used `-inf`) and the function
+     where $\theta$ is the direction of the photon, $+$ is used for the `lowerhalf` type sensor ( $\theta = 0$ when the photon arriving from the conventionally used `-inf`) and the function
      defined gives us the cross section area of the sphere. <br />
      The added function used to incorporate this geometry is called **GetGeometricAngularSensitivity** and is found in the `tabulator_batch.py` script. The result is a **I3CLSimFunctionPolynomial** and the first element of the array given is the **a<sub>0</sub>** (constant)coefficient, whereas the last one is the **a<sub>n-1</sub>**  
      The function is provided below : <br />
