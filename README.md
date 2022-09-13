@@ -143,7 +143,7 @@ For each configuration {z,zen} the files inside the directories (same-name.fits)
   - stack
 The first 2 subdirectories contain every .abs and .prob file accordingly for each depth and zenith source configuration <br />
 Later, these are the input directories required to run the `singletable_splinestack.py` script. <br />
-The output files for the `singletable_splinestack.py` are `/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/splines/stack/ {prob/abs}_stack.fits` 
+The output files for the `singletable_splinestack.py` are `/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/splines/stack/{prob/abs}_stack.fits` 
 
 ##### submit\_scripts
 
