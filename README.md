@@ -126,6 +126,25 @@ arguments:
 - r: In case r is True then the x-axis represents the radius in meters
 - phi: Same for phi
 
+###### Location of files: <br />
+- **/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/cascade_fulltable_{`upper/lower`}_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents100**: <br />
+in each directory 102 files are stored <br />
+the first file: `cascade_fulltable_lower_spice_bfr-v2_flat_z-100_zen100_azi180_nevents10000_0_range.fits`
+is the .fits file which contains 10k events and the other 101 are .fits files with 100 events but with a different `--seed` parameter every time ranging from `{0,100}` <br />
+- **/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/add_lower_upper:cascade_fulltable_sum_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents100**: <br />
+
+##### currently only the directories: cascade_fulltable_sum_spice_bfr-v2_flat_z-200_zen{`zen`}_azi180_nevents10000 are not empty
+
+For each configuration {z,zen} the files inside the directories (same-name.fits) were produced using the technique of adding the lower and upper .fits files so as to use an isotropic sensor for the final production. <br />
+
+- **/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/splines** contains 3 subdirectories:
+  - abs
+  - prob
+  - stack
+The first 2 subdirectories contain every .abs and .prob file accordingly for each depth and zenith source configuration <br />
+Later, these are the input directories required to run the `singletable_splinestack.py` script. <br />
+The output files for the `singletable_splinestack.py` are `/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/splines/stack/ {prob/abs}_stack.fits` 
+
 ##### submit\_scripts
 
 all of the required scripts for mass production meaning:
@@ -134,9 +153,11 @@ all of the required scripts for mass production meaning:
         - zenith: from 0 to 180 degrees with a step of 10 degrees
 
 ###### reminder
-for each source configuration 100 .fits files with `nevents=100` are created and then the script `merge_lower/upper.py` should be invoked to merge all of them into a single file
+for each source configuration 100 .fits files with `nevents=100` are created and then the script `merge_lower/upper.sh` should be invoked to merge all of them into a single file <br />
 
-- abs and prob spline fitting for the final .fits files(10000 events each) for every source configuration
+- adding the lower and upper .fits files can be implemented running the script `/merge/add_lower_upper.sh` so that the **cascade_fulltable_sum_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents10000** <br />
+
+- abs and prob spline fitting for the final .fits files(10000 events each) for every source configuration 
 
 
 
