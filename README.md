@@ -126,7 +126,7 @@ arguments:
 - r: In case r is True then the x-axis represents the radius in meters
 - phi: Same for phi
 
-###### Location of files: <br />
+##### Location of files: <br />
 - **/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/cascade_fulltable_{`upper/lower`}_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents100**: <br />
 in each directory 102 files are stored <br />
 the first file: `cascade_fulltable_lower_spice_bfr-v2_flat_z-100_zen100_azi180_nevents10000_0_range.fits`
@@ -152,7 +152,7 @@ all of the required scripts for mass production meaning:
   where - depth: from -800 to 800m with a step of 20m
         - zenith: from 0 to 180 degrees with a step of 10 degrees
 
-###### reminder
+##### reminder
 for each source configuration 100 .fits files with `nevents=100` are created and then the script `merge_lower/upper.sh` should be invoked to merge all of them into a single file <br />
 
 - adding the lower and upper .fits files can be implemented running the script `/merge/add_lower_upper.sh` so that the **cascade_fulltable_sum_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents10000** <br />
