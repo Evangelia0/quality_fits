@@ -133,7 +133,7 @@ arguments:
 in each directory 102 files are stored <br />
 the first file: `cascade_fulltable_lower_spice_bfr-v2_flat_z-100_zen100_azi180_nevents10000_0_range.fits`
 is the .fits file which contains 10k events and the other 101 are .fits files with 100 events but with a different `--seed` parameter every time ranging from `{0,100}` <br />
-- **/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/add_lower_upper:cascade_fulltable_sum_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents100**: <br />
+- **/lustre/fs24/group/icecube/egrizaniti/tablemaker/fits/add_lower_upper/cascade_fulltable_sum_spice_bfr-v2_flat_z{`z`}_zen{`zen`}_azi180_nevents100**: <br />
 
 ##### currently only the directories: cascade_fulltable_sum_spice_bfr-v2_flat_z-200_zen{`zen`}_azi180_nevents10000 are not empty
 
