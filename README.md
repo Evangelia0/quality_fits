@@ -63,7 +63,6 @@ The basic idea was to use the already existing models, with modifications in ord
     `tray.AddSegment(TabulatePhotonsFromSource...)` <br />
     `TabulatePhotonsFromSource` is a module imported from `tabulator.py`. Since this is not a part of the icecube software, `tabulator_batch.py` script is the one with the additions for the isopdom. <br />
     This module defines among **many** other things:
-    ### ELABORATE ON EACH ONE
     - The DOM Radius
     - The reference Area
     - The DOM Acceptance (Wavelength Acceptance)
@@ -74,6 +73,9 @@ The basic idea was to use the already existing models, with modifications in ord
   - upperhalf
   - isotropic
 (_lower and upper halves can be combined to produce the isotropic one, the option was added for completeness_)
+
+##### The .fits files were produced using the --lowerhalf and --upperhalf options <br />
+##### Using the `submit_scripts` these can be added so that the isotropic sensor is the one used at the end 
 
 - Since the DEgg's properties are closer to what is to be simulated we used its radius and reference area and altered the **angular sensitivity** and **wavelength acceptance** in a way that:
    - We needed the product <br />
